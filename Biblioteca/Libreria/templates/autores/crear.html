@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block titulo  %} Agregar Autor {% endblock %}
+
+{% block contenido  %}
+
+<div class="card">
+    <div class="card-header">
+        Agregar Autor
+    </div>
+    <div class="card-body">
+        <h4 class="card-title">Datos del Autor</h4>
+    {% include 'autores/form.html' %}
+
+
+    </div>
+</div>
+
+{% endblock %}

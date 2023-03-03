@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block titulo  %} Inicio {% endblock %}
+
+{% block contenido  %}
+
+<main>
+    <section class="portafolio">
+        <div class="contenedor">
+            <h2 class="titulo">MANHWAS POPULARES</h2>
+            <div class="galeria-port">
+                <div class="imagen-port">
+                    <img src="../../static/img/lavidadespuesdelamuerte.jpg" alt="">
+                    <div class="hover-galeria">
+                        <p>La Vida Despues De La Muerte</p>
+                    </div>
+                </div>
+                <div class="imagen-port">
+                    <img src="../../static/img/sololeveling.jpg" alt="">
+                    <div class="hover-galeria">
+                        <p>Solo Leveling</p>
+                    </div>
+                </div>
+                <div class="imagen-port">
+                    <img src="../../static/img/therandomchattinggirl.jpg" alt="">
+                    <div class="hover-galeria">
+                        <p>Random Chat</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="clientes contenedor">
+        <h2 class="titulo">Nuestros Clientes</h2>
+        <div class="cardss">
+            <div class="cardd">
+                <img src="../../static/img/brayan.jpg" alt="">
+                <div class="contenido-textos-card">
+                    <h4>Brayan</h4>
+                    <p>Buena pagina para leer manhwas una de mis favoritas</p>
+                </div>
+            </div>
+            <div class="cardd">
+                <img src="../../static/img/ashley.jpg" alt="">
+                <div class="contenido-textos-card">
+                    <h4>Ashley</h4>
+                    <p>Recomiendo esta pagina para leer manhwas :D</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+{% endblock %}

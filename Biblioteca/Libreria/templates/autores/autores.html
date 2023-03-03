@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block titulo  %} Agregar Autor {% endblock %}
+
+{% block contenido  %}
+
+  <div class="card mt-3">
+    <div class="card-header">
+        <a name="" id="" class="btn btn-success" href="{% url 'autor_crear' %}" role="button">Agregar Autor</a>
+    </div>
+    <div class="card-body">
+        <h4 class="card-title mb-4">Lista De Autores</h4>
+        <form method="get" action="{% url 'autores' %}">
+          <div class="input-group mb-3">
+              <input type="text" class="form-control" name="q" placeholder="Buscar por ID o nombre..." value="{{ request.GET.q }}">
+              <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" type="submit">Buscar</button>
+              </div>
+          </div>
+      </form>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Apodo</th>
+              <th>Nacionalidad</th>
+              <th>Correo Electrónico</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for autor in autores %}
+            <tr>
+              <td>{{ autor.id }}</td>
+              <td>{{ autor.nombre }}</td>
+              <td>{{ autor.apellido }}</td>
+              <td>{{ autor.apodo }}</td>
+              <td>{{ autor.nacionalidad }}</td>
+              <td>{{ autor.correo }}</td>
+              <td>
+                <a href="{% url 'autor_editar' autor.id %}" class="btn btn-sm btn-outline-secondary mr-2">Editar</a>
+                <form action="{% url 'autor_eliminar' autor.id %}" method="POST" class="d-inline-block">
+                    {% csrf_token %}
+                    <input type="hidden" name="id" value="{{ autor.id }}">
+                    <button name="eliminar" class="btn btn-sm btn-outline-danger eliminar-autor" data-nombre="{% if autor.apodo %}{{ autor.apodo }}{% else %}{{ autor.nombre }}{% endif %}" data-id="{{ autor.id }}" role="button">Borrar</button>
+                </form>
+              </td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="7" class="text-center">No se encontraron autores.</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock %}

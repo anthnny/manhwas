@@ -1,0 +1,49 @@
+<form enctype="multipart/form-data" method="post">
+  {% csrf_token %}
+  
+  {% for campo in formulario %}
+    <div class="mb-3">
+      <label for="" class="form-label">{{ campo.label }}:</label>
+      
+      {% if campo.field.widget.input_type == 'file' and campo.value %}
+        <img src="{{MEDIA_URL}}/imagenes/{{campo.value}}" width="100" alt="" srcset="">
+      {% endif %}
+
+      {% if campo.name == 'autor' %}
+      <select class="form-control" name="{{ campo.name }}">
+        <option value="" {% if not libro.autor %} selected {% endif %}>{{ campo.field.empty_label }}</option>
+        {% for autor in campo.field.choices.queryset %}
+        <option value="{{ autor.id }}" {% if libro.autor and libro.autor.id == autor.id %} selected {% endif %}>{{ autor.nombre }} {{ autor.apellido }} {{ autor.apodo }}</option>
+        {% endfor %}
+      </select>
+      {% elif campo.name == 'fecha_publicacion' %}
+        <input type="text" class="form-control datepicker" name="{{ campo.name }}" id="" aria-describedby="helpId" placeholder="{{ campo.label }}" value="{{ campo.value | default:'' }}">
+      {% else %}
+        {% if campo.name == 'descripcion' %}
+          <textarea class="form-control textarea-grande"
+            class="form-control" 
+            name="{{ campo.name }}" 
+            id="" 
+            aria-describedby="helpId" 
+            placeholder="{{ campo.label }}"
+          >{{ campo.value | default:'' }}</textarea>
+        {% else %}
+          <input 
+            type="{{ campo.field.widget.input_type }}"
+            class="form-control" 
+            name="{{ campo.name }}" 
+            id="" 
+            aria-describedby="helpId" 
+            placeholder="{{ campo.label }}"
+            value="{{ campo.value | default:'' }}"
+          >
+        {% endif %}
+      {% endif %}
+    </div>
+    
+    <div class="col-12 help-text"> {{campo.errors}} </div>
+  {% endfor %}
+
+  <input name="" id="" class="btn btn-success" type="submit" value="Enviar Información">
+  <a name="" id="" class="btn btn-primary" href="{% url 'libros' %}" role="button">Cancelar</a>
+</form>

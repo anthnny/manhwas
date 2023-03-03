@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block titulo  %} Lista de Libros {% endblock %}
+
+{% block contenido  %}
+
+  <div class="card mt-3 tablah">
+    <div class="card-header">
+        <a name="" id="" class="btn btn-success" href="{% url 'libro_crear' %}" role="button">Agregar Libro</a>
+    </div>
+    <div class="card-body">
+        <h4 class="card-title mb-4">Libros</h4>
+        <form method="get" action="{% url 'libros' %}">
+          <div class="input-group mb-3">
+              <input type="text" class="form-control" name="q" placeholder="Buscar por ID o nombre..." value="{{ request.GET.q }}">
+              <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" type="submit">Buscar</button>
+              </div>
+          </div>
+      </form>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Título</th>
+              <th>Descripción</th>
+              <th>Autor</th>
+              <th>Fecha de Publicación</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for libro in libros %}
+            <tr>
+              <td>{{ libro.id }}</td>
+              <td>{{ libro.titulo }}</td>
+              <td>{{ libro.descripcion }}</td>
+              {% if libro.autor.nombre and libro.autor.apellido %}
+              <td>{{ libro.autor.nombre }} {{ libro.autor.apellido }}</td>
+              {% else %}
+              <td>{{ libro.autor.apodo }}</td>
+              {% endif %}
+              <td>{{ libro.fecha_publicacion }}</td>
+              <td>
+                <a href="{% url 'libro_editar' libro.id %}" class="btn btn-sm btn-outline-secondary mr-2">Editar</a>
+                <form action="{% url 'libro_eliminar' libro.id %}" method="POST" class="d-inline-block">
+                    <br>
+                    {% csrf_token %}
+                    <input type="hidden" name="id" value="{{ libro.id }}">
+                    <button name="eliminar" class="btn btn-sm btn-outline-danger delete-button" data-nombre="{{ libro.titulo }}" data-id="{{ libro.id }}" role="button">Borrar</button>
+                </form>
+              </td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="6" class="text-center">No se encontraron libros.</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock %}

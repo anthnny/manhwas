@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block titulo  %} Contactanos {% endblock %}
+
+{% block contenido  %}
+
+<div class="container-form">
+    <div class="info-form">
+        <h2>CONTACTANOS</h2>
+        <a href="#"> <i class="fa fa-phone">
+        </i>0962745197</a>
+        <a href="#"> <i class="fa fa-envelope">
+        </i>alopezm6@unemi.edu.ec</a>
+        <a href="#"> <i class="fa fa-map-marked">
+        </i>Milagro, Ecuador</a>
+    </div>
+    <form action="https://formsubmit.co/alopezm6@unemi.edu.ec" method="post"
+        <br>
+        <input type="email" name="email" placeholder="Ingresa tu correo" class="campo">
+        <input type="text" name="nombre" placeholder="Ingresa tu nombre" class="campo">
+        <textarea name="mensaje" placeholder="Ingresa tu mensaje"></textarea>
+        <input type="submit" name="enviar" value="Enviar mensaje" class="btn-enviar">
+    </form>
+</div>
+
+{% endblock %}
